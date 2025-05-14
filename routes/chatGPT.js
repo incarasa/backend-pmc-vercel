@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const OpenAI = require("openai");
-require("dotenv").config();
-
 const openAIClient = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
@@ -18,6 +16,10 @@ const CAMPOS_ESPERADOS = [
 
 router.post("/", async (req, res) => {
   const { texto_usuario } = req.body;
+
+  if (typeof texto_usuario !== "string" || texto_usuario.trim() === "") {
+  return res.status(400).json({ error: "El campo 'texto_usuario' es obligatorio y debe ser texto." });
+  }
 
   // Ajustamos el prompt para indicarle al modelo cómo interpretar notaciones abreviadas de tasas nominales
   const prompt = `

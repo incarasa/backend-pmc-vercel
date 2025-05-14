@@ -1,29 +1,21 @@
 const express = require("express");
-// Create an instance of the express application
 const app = express();
 
-const cors = require("cors"); // Importa cors
-// Import the body-parser middleware which allows the app to parse JSON data
-const bodyParser = require("body-parser");  
-
-app.use(cors()); // Habilita CORS para todas las rutas
-
-// Middleware
-// Use body-parser middleware to parse incoming JSON data
-app.use(bodyParser.json());
-
-// Import the chatGPT endpoint module
+const cors = require("cors");
 const chatGPTRoutes = require("./routes/chatGPT");
 
-// Use the chatGPT endpoint module to handle requests to "/chatGPT" endpoint
+// Middleware
+app.use(cors()); // Habilita CORS
+app.use(express.json()); // Analiza JSON (reemplaza a body-parser)
+
+// Rutas
 app.use("/chatGPT", chatGPTRoutes);
 
-// Error handling middleware
-// Handle any errors by sending a 500 Internal Server Error status and message
+// Middleware de manejo de errores
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Internal Server Error");
 });
 
-// Start the server and listen on port 3000
+// Exportar la app para Vercel (serverless)
 module.exports = app;
