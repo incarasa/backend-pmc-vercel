@@ -5,7 +5,7 @@
     { "src": "api/ping.js",  "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/ping",  "dest": "/api/ping.js" },          // <- NUEVO
+    { "src": "/ping",  "dest": "/api/ping.js" },
     { "src": "/(.*)",  "dest": "/api/index.js" }
   ]
 }
