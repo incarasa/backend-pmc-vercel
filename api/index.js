@@ -1,6 +1,5 @@
-// api/index.js – sin serverless-http
-const app = require("../index");          // tu instancia Express
+const app = require("../index");
 
 module.exports = (req, res) => {
-  app(req, res);                          // ⬅️  pasa req/res a Express
+  app(req, res);                  // pasa el control a Express
 };

@@ -106,11 +106,5 @@ Entrega la respuesta estrictamente en formato JSON (sin texto adicional) y encie
   }
 });
 
-router.post("/debug", (req, res) => {
-  console.log("Body recibido en /debug:", req.body); // también logea en consola
-  res.json({
-    recibido: req.body
-  });
-});
 
 module.exports = router;

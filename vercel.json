@@ -4,6 +4,6 @@
     { "src": "api/index.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/chatGPT/(.*)", "dest": "/api/index.js" }
+    { "src": "/chatGPT(/.*)?", "dest": "/api/index.js" }
   ]
 }
