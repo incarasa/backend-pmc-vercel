@@ -1,8 +1,17 @@
+
 const express = require("express");
 const router = express.Router();
 const OpenAI = require("openai");
 const openAIClient = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
+});
+
+// Convierte body a objeto si llega como string
+router.use((req, _res, next) => {
+  if (typeof req.body === "string") {
+    try { req.body = JSON.parse(req.body); } catch (_) {}
+  }
+  next();
 });
 
 // Lista actualizada de campos esperados
