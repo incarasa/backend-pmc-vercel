@@ -1,4 +1,6 @@
-const serverless = require("serverless-http");
-const app = require("../index"); // importa tu app de Express
+// api/index.js – sin serverless-http
+const app = require("../index");          // tu instancia Express
 
-module.exports = serverless(app, { bodyParser: false });
+module.exports = (req, res) => {
+  app(req, res);                          // ⬅️  pasa req/res a Express
+};
