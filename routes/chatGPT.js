@@ -4,7 +4,7 @@ const OpenAI = require("openai");
 require("dotenv").config();
 
 const openAIClient = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
+  apiKey: process.env.CHATGPT_API_KEY
 });
 
 // Lista actualizada de campos esperados
