@@ -3,8 +3,9 @@ const cors    = require("cors");
 const app     = express();
 const chatGPTRoutes = require("./routes/chatGPT");
 
-// ❶  NADA de express.json() aquí
 app.use(cors());
+app.use(express.json());      //  ← sí lo necesitamos ahora
+
 app.use("/chatGPT", chatGPTRoutes);
 
 app.use((err, req, res, _next) => {
