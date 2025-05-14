@@ -3,6 +3,10 @@ const cors    = require("cors");
 const app     = express();
 const chatGPTRoutes = require("./routes/chatGPT");
 
+// --- verificación fast ---
+app.get("/_echo_ping", (req, res) => res.send("pong"));
+// -------------------------
+
 /* ───── RUTA DE DEPURACIÓN  SIN PARSER ─────────────────────────── */
 const rawBodySaver = (req, res, buf) => { req.rawBody = buf; };
 
