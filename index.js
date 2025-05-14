@@ -1,25 +1,27 @@
 const express = require("express");
-const cors = require("cors");
-const app = express();
-
-const rawBodySaver = (req, res, buf) => {
-  req.rawBody = buf;          // guarda el cuerpo tal cual
-};
-
-app.post("/echo", express.raw({ type: "*/*", verify: rawBodySaver }), (req, res) => {
-  res.json({
-    headers: req.headers,
-    contentLengthHeader: req.headers["content-length"] || null,
-    bytesReceived: req.rawBody.length,
-    bodyAsString: req.rawBody.toString()
-  });
-});
-
-
+const cors    = require("cors");
+const app     = express();
 const chatGPTRoutes = require("./routes/chatGPT");
 
+/* ───── RUTA DE DEPURACIÓN  SIN PARSER ─────────────────────────── */
+const rawBodySaver = (req, res, buf) => { req.rawBody = buf; };
+
+app.post(
+  "/echo",
+  express.raw({ type: "*/*", verify: rawBodySaver }),   // ← NO usa parser json
+  (req, res) => {
+    res.json({
+      headers: req.headers,
+      contentLengthHeader: req.headers["content-length"] || null,
+      bytesReceived: req.rawBody.length,
+      bodyAsString: req.rawBody.toString()
+    });
+  }
+);
+/* ──────────────────────────────────────────────────────────────── */
+
 app.use(cors());
-app.use(express.json()); // ✅ correcto
+app.use(express.json());          //  ⬅️  A partir de aquí sí parseamos JSON
 
 app.use("/chatGPT", chatGPTRoutes);
 
