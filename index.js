@@ -26,6 +26,4 @@ app.use((err, req, res, next) => {
 });
 
 // Start the server and listen on port 3000
-app.listen(3000, () => {
-  console.log("Server started on port 3000");
-});
+module.exports = app;

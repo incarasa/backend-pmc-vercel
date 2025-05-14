@@ -17,6 +17,7 @@
     "express": "^4.21.2",
     "openai": "^4.85.4",
     "proyecto": "file:",
+    "serverless-http": "^3.2.0",
     "yup": "^1.6.1"
   }
 }
